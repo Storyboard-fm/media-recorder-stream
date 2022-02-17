@@ -38,9 +38,9 @@ async function createRecordStream (media, opts) {
 
   rs.media = media
   // rs.recorder = new window.MediaRecorder(media, opts)
-  rs.recorder = new MediaRecorder(media, {
+  rs.recorder = new MediaRecorder(media, Object.assign(opts, {
     mimeType: 'audio/wav',
-  })
+  }))
   rs.recorder.addEventListener('dataavailable', function (ev) {
     push(ev.data)
   })
