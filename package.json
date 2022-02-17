@@ -4,6 +4,8 @@
   "description": "The Media Recorder API in the browser as a readable stream",
   "main": "index.js",
   "dependencies": {
+    "extendable-media-recorder": "^6.6.0",
+    "extendable-media-recorder-wav-encoder": "^7.0.66",
     "readable-stream": "^2.1.2"
   },
   "devDependencies": {

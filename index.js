@@ -1,4 +1,6 @@
 var stream = require('readable-stream')
+var { MediaRecorder } = require('extendable-media-recorder')
+var { connect } = require('extendable-media-recorder-wav-encoder')
 
 module.exports = createRecordStream
 
