@@ -1,16 +1,18 @@
 var stream = require('readable-stream')
-var { MediaRecorder } = require('extendable-media-recorder')
+var { MediaRecorder, register } = require('extendable-media-recorder')
 var { connect } = require('extendable-media-recorder-wav-encoder')
 
 module.exports = createRecordStream
 
-function createRecordStream (media, opts) {
+async function createRecordStream (media, opts) {
   if (!opts) opts = {}
 
   var rs = stream.Readable()
   var top = 0
   var btm = 0
   var buffer = []
+
+  await register(await connect())
 
   rs.recorder = null
   rs.media = null
@@ -35,7 +37,10 @@ function createRecordStream (media, opts) {
   }
 
   rs.media = media
-  rs.recorder = new window.MediaRecorder(media, opts)
+  // rs.recorder = new window.MediaRecorder(media, opts)
+  rs.recorder = new MediaRecorder(media, {
+    mimeType: 'audio/wav',
+  })
   rs.recorder.addEventListener('dataavailable', function (ev) {
     push(ev.data)
   })
